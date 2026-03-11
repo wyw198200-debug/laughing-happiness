@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InsightLite - 类 Spotfire 数据分析</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>InsightLite</h1>
+      <p>上传 CSV，快速做筛选、聚合和可视化分析</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>1) 导入数据</h2>
+        <input id="csvInput" type="file" accept=".csv,text/csv" />
+        <p class="hint">支持 UTF-8 编码的 CSV 文件。</p>
+      </section>
+
+      <section class="panel grid-2">
+        <div>
+          <h2>2) 筛选数据</h2>
+          <label for="filterColumn">筛选列</label>
+          <select id="filterColumn"></select>
+
+          <label for="filterValue">包含关键字</label>
+          <input id="filterValue" type="text" placeholder="例如：华东" />
+
+          <button id="applyFilter">应用筛选</button>
+          <button id="clearFilter" class="secondary">清除筛选</button>
+          <p id="rowInfo" class="hint">尚未加载数据</p>
+        </div>
+
+        <div>
+          <h2>3) 图表配置</h2>
+          <label for="xColumn">X 轴</label>
+          <select id="xColumn"></select>
+
+          <label for="yColumn">Y 轴</label>
+          <select id="yColumn"></select>
+
+          <label for="chartType">图表类型</label>
+          <select id="chartType">
+            <option value="bar">柱状图</option>
+            <option value="line">折线图</option>
+            <option value="scatter">散点图</option>
+          </select>
+
+          <label for="aggType">聚合方式</label>
+          <select id="aggType">
+            <option value="sum">Sum</option>
+            <option value="avg">Avg</option>
+            <option value="count">Count</option>
+          </select>
+
+          <button id="renderChart">生成图表</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>4) 可视化结果</h2>
+        <div id="chart"></div>
+      </section>
+
+      <section class="panel">
+        <h2>5) 数据预览</h2>
+        <div class="table-wrap">
+          <table id="dataTable"></table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>InsightLite MVP · 类 Spotfire 的轻量数据分析体验</small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
