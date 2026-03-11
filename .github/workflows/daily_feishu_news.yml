@@ -1,0 +1,28 @@
+name: Daily International Finance News To Feishu
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  push-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Push daily news to Feishu
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          NEWS_QUERY: ${{ secrets.NEWS_QUERY }}
+          NEWS_LIMIT: ${{ secrets.NEWS_LIMIT }}
+        run: python src/daily_finance_news_to_feishu.py
